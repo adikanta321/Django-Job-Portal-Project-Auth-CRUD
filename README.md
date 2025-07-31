@@ -36,5 +36,5 @@ This is a job portal website built using Django where users can register, log in
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/django-job-portal.git
+   git clone https://github.com/adikanta321/django-job-portal.git
    cd django-job-portal
