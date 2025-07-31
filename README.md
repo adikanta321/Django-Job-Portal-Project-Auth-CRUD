@@ -6,7 +6,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 
 
-## 🧑‍💼 Django Job Portal
+## 🧑‍💼 Python , Django Job Portal
 
 A powerful, production-ready Job Portal built with Django — featuring secure custom authentication, robust email workflows, and a fully responsive interface.
 
