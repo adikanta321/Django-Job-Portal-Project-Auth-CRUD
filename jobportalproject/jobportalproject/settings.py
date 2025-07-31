@@ -65,7 +65,7 @@ ROOT_URLCONF = 'jobportalproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'], #Your Template Folder Name 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,14 +82,16 @@ WSGI_APPLICATION = 'jobportalproject.wsgi.application'
 
 
 
+
 # SMTP Settings (smtplib works with this setup)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_PORT = ('EMAIL_PORT_NUMBER')
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'aryabratdash81@gmail.com'  # your gmail
-EMAIL_HOST_PASSWORD = 'himwckuhmdvgfpbe'  # your app password
+EMAIL_HOST_USER = ('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = ('EMAIL_HOST_PASSWORD') #Your Google App Password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -101,11 +103,11 @@ AUTH_USER_MODEL = 'accounts.User'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'jobproject_db',
-        'USER': 'root',
-        'PASSWORD': '123456',  # Replace with your MySQL password    
-        'HOST': 'localhost',  # Or your database host
-        'PORT': '3306',  # Default MySQL port
+        'NAME':('DB_NAME'),
+        'USER': ('DB_USER'),
+        'PASSWORD': ('DB_PASSWORD'),  # Replace with your MySQL password    
+        'HOST': ('DB_HOST'),  # Or your database host
+        'PORT': ('DB_PORT'),  # Default MySQL port
 
     }
 }
