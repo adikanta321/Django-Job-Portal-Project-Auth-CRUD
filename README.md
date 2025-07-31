@@ -6,7 +6,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 
 
-# 🧑‍💼 Django Job Portal
+## 🧑‍💼 Django Job Portal
 
 A powerful, production-ready Job Portal built with Django — featuring secure custom authentication, robust email workflows, and a fully responsive interface.
 
@@ -18,16 +18,51 @@ Admins have complete control over job postings with full CRUD capabilities. The 
 
 ## ✨ Features
 
-- ✅ Email-based user authentication (custom login)
-- 🔐 Secure password reset via Google SMTP
-- 📄 Job listing and detailed job view
-- ⚡ One-click job application for logged-in users
-- 🧾 View & manage applied jobs via dashboard
-- 🗑️ Option to delete applied jobs
-- 🛠️ Admin-side job CRUD (create, read, update, delete)
-- 🖼️ Profile image displayed in navbar
-- 💬 Flash messages & alerts for clean UX
-- 📱 Responsive, mobile-friendly UI using Bootstrap 5
+- ✅ Email-Based Authentication
+
+ Secure and intuitive login system using email credentials, replacing Django's default username-based authentication.
+
+- 🔐 Password Reset via Google SMTP
+
+ Robust password recovery flow using Django’s token system with Gmail’s SMTP server via smtplib and Google App Passwords.
+
+- 📄 Dynamic Job Listings with Detailed Views
+
+ Job data is dynamically fetched from a MySQL database and rendered using Django’s ORM and templating engine.
+
+- ⚡ One-Click Job Applications
+
+-- Authenticated users can apply to jobs instantly, with their application data stored in relational tables without redundant forms.
+
+- 🧾 User Dashboard for Applications
+
+-- A personalized dashboard shows the list of jobs each user has applied for — powered by optimized database queries.
+
+- 🗑️ Delete Applied Jobs
+
+-- Users have the option to remove applications with confirmation prompts and backend integrity checks.
+
+- 🛠️ Admin-Side Full Job Management (CRUD)
+
+-- Admins can create, update, and delete job listings using Django Admin, with clean model registration and validation.
+
+- 🖼️ Profile Picture Display in Navbar
+
+-- Users can upload a profile picture stored in Django’s media folder, automatically rendered in the site’s top navigation.
+
+- 📦 Database Architecture (MySQL)
+
+-- All user data, job posts, applications, and media files are securely stored using a normalized MySQL schema with Django’s ORM handling complex relations.
+
+- 💬 Interactive Flash Messages
+
+-- All actions such as login, apply, update, and delete show appropriate success/error messages using Django’s messages framework.
+
+- 📱 Responsive Frontend (Bootstrap 5)
+
+-- Clean, modern, and mobile-first UI design using Bootstrap 5 for cross-device compatibility and a professional experience.
+
+
 
 ---
 
