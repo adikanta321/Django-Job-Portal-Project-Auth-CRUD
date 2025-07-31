@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Jobs You Applied For</h2>
+
+    <div class="row">
+        {% if applications %}
+            {% for app in applications %}
+                {# FIX: Use app.job.job_id instead of app.job.id #}
+                {% if app.job and app.job.job_id %} 
+                <div class="col-md-6">
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ app.job.job_title }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ app.job.company_name }}</h6>
+                            <p class="card-text">{{ app.job.job_description|truncatewords:20 }}</p> 
+                            <p class="card-text">
+                                <i class="bi bi-geo-alt-fill text-danger"></i> 
+                                {{ app.job.job_location }} 
+                            </p>
+                            <p class="card-text"><small class="text-muted">Applied on: {{ app.application_date|date:"M d, Y" }}</small></p>
+
+                            {# FIX: Use app.job.job_id instead of app.job.id #}
+                            <form method="POST" action="{% url 'delete_applied_job' app.job.job_id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Remove Application 🗑️</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                    <div class="col-12">
+                        <div class="alert alert-warning">
+                            An application without a valid job link was found. It might have been deleted.
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info col-12">You haven't applied for any jobs yet.</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+<!-- In your `search_results.html` template -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Search Results for "{{ query }}" | NΞXUS{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="mb-4">Search Results for "{{ query }}"</h1>
+
+            {% if jobs %}
+                <p class="text-muted">Found {{ jobs|length }} result{{ jobs|length|pluralize }} matching your search.</p>
+                
+                {% for job in jobs %}
+                <div class="card mb-3 shadow-sm rounded-lg">
+                    <div class="card-body">
+                        <!-- Corrected field names based on your model -->
+                        <h5 class="card-title text-primary">{{ job.job_title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ job.company_name }}</h6>
+                        <p class="card-text">{{ job.job_description|truncatechars:150 }}</p>
+                        
+                        <!-- CORRECTED: Pass job.job_id to the URL -->
+                        <a href="{% url 'job_detail' job.job_id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-warning text-center" role="alert">
+                    <h4 class="alert-heading">No results found!</h4>
+                    <p>We couldn't find any jobs matching "{{ query }}".</p>
+                    <hr>
+                    <p class="mb-0">Please try a different search query.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

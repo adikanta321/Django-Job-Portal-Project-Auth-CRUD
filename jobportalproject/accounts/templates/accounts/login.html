@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-gradient bg-primary text-white text-center rounded-top-4">
+                <h3 class="mb-0">Welcome Back!</h3>
+                <small class="text-light">Login to your account</small>
+            </div>
+            <div class="card-body p-4">
+
+                <!-- Show non-field errors -->
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.non_field_errors %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Email address</label>
+                        <input type="email" name="username" class="form-control {% if form.username.errors %}is-invalid{% endif %}" id="id_username" placeholder="Enter email" required>
+                        {% if form.username.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.username.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control {% if form.password.errors %}is-invalid{% endif %}" id="id_password" placeholder="Enter password" required>
+                        {% if form.password.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.password.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mt-3">Login</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <a href="{% url 'register' %}" class="text-decoration-none">Don't have an account? Register</a>
+                </div>
+                <div class="text-center mt-2">
+                    <a href="{% url 'forgot_password' %}" class="text-muted small">Forgot Password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

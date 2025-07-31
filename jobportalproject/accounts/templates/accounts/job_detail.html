@@ -1,0 +1,32 @@
+<!-- In a new file, `job_detail.html` -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ job.job_title }} | NΞXUS{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm rounded-lg">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="card-title mb-0">{{ job.job_title }}</h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-subtitle mb-2 text-muted">{{ job.company_name }}</h5>
+                    <hr>
+                    <p class="card-text"><strong>Location:</strong> {{ job.job_location }}</p>
+                    <p class="card-text"><strong>Job Type:</strong> {{ job.job_type }}</p>
+                    <p class="card-text"><strong>Salary:</strong> ₹{{ job.salary|default:'Not specified' }}</p>
+                    <hr>
+                    <h4>Job Description</h4>
+                    <p class="card-text">{{ job.job_description }}</p>
+                    
+                    <a href="#" class="btn btn-primary mt-3">Apply Now</a>
+                    <a href="{% url 'search' %}" class="btn btn-outline-secondary mt-3">Back to Search</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

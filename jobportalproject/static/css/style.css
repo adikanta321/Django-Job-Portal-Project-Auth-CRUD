@@ -1,0 +1,955 @@
+/* Import Google Font: Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* --- Variables (For a more harmonious and easily manageable design system) --- */
+:root {
+    --primary-color: #0a4275; /* Deep Ocean Blue - Professional & Trustworthy */
+    --secondary-color: #fca311; /* Golden Accent - Warmth & Engagement */
+    --accent-light: #ffc977; /* Lighter shade of secondary for subtle highlights */
+    --text-dark: #333d42; /* Soft Black - Excellent readability */
+    --text-medium: #555e67; /* Mid Grey - For paragraphs */
+    --text-light: #eff2f6; /* Off-white for dark backgrounds */
+    --background-light: #f9fbfe; /* Very light, cool background */
+    --border-radius-large: 16px; /* Noticeably rounded for a friendly feel */
+    --border-radius-medium: 10px;
+    --transition-duration: 0.35s; /* Slightly slower for more noticeable smoothness */
+    --transition-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth ease-out-quad */
+    --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.05); /* Very soft, almost unnoticeable */
+    --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.08); /* More pronounced for interactive elements */
+    --shadow-deep: 0 15px 50px rgba(0, 0, 0, 0.12); /* For prominent elements like sticky nav */
+}
+
+/* --- Base Styles --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.75; /* Optimal for readability */
+    color: var(--text-medium);
+    background-color: var(--background-light); /* Using your defined variable */
+    overflow-x: hidden; /* Prevent horizontal scroll from subtle animations */
+    -webkit-font-smoothing: antialiased; /* Smoother font rendering */
+    -moz-osx-font-smoothing: grayscale; /* Smoother font rendering */
+}
+
+/* Global focus outline for accessibility */
+*:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 3px;
+    border-radius: var(--border-radius-medium);
+}
+
+/* --- General Elements & Layout --- */
+.container {
+    max-width: 1300px; /* Slightly wider for modern displays */
+    margin: 0 auto;
+    padding: 0 30px; /* Generous side padding */
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800; /* Bold and impactful */
+    color: var(--primary-color);
+    margin-top: 2.2em;
+    margin-bottom: 0.8em;
+    line-height: 1.25;
+    letter-spacing: -0.02em; /* Slightly tighter for headings */
+}
+
+h1 { font-size: 3.2em; }
+h2 { font-size: 2.6em; }
+h3 { font-size: 2.1em; }
+h4 { font-size: 1.7em; }
+h5 { font-size: 1.4em; }
+h6 { font-size: 1.1em; }
+
+p {
+    font-weight: 400;
+    margin-bottom: 1.3em;
+    color: var(--text-medium);
+    max-width: 75ch; /* Optimal line length for readability */
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-duration) var(--transition-easing), text-decoration var(--transition-duration) var(--transition-easing);
+}
+
+a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* --- Navbar Styles --- */
+.navbar {
+    background-color: #ffffff !important; /* White background from previous suggestion, !important to override Bootstrap .bg-primary from base.html */
+    padding: 0.8rem 1rem; /* Adjust padding from previous suggestion */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth from previous suggestion */
+    position: sticky; /* Keep it sticky */
+    top: 0;
+    z-index: 1000;
+    border-bottom-left-radius: 0; /* Remove rounded corners, as per previous suggestion's sleek look */
+    border-bottom-right-radius: 0;
+    transition: background-color var(--transition-duration) var(--transition-easing), box-shadow var(--transition-duration) var(--transition-easing);
+}
+
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    /* Color handled via inline style in base.html for specific NΞXUS styling */
+    font-size: 1.8rem; /* Match previous suggestion for consistency */
+    letter-spacing: -0.03em;
+    transition: transform 0.3s ease-out, color 0.3s ease-out;
+}
+
+.navbar-brand:hover {
+    color: var(--secondary-color); /* Use secondary color for hover */
+    transform: scale(1.02); /* Slight scale on hover */
+}
+
+.navbar-brand img {
+    margin-right: 0.5rem; /* Space between logo and text */
+}
+
+.navbar-nav .nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500; /* Changed from 600 to 500 for a slightly lighter feel */
+    color: #060707 !important; /* Darker grey for nav links from previous suggestion */
+    margin-left: 15px; /* Spacing between items */
+    padding: 0.7rem 1.0rem; /* Adjusted padding */
+    position: relative;
+    transition: all 0.3s ease; /* Faster transition */
+    text-transform: none; /* Removed uppercase */
+    letter-spacing: 0; /* Removed letter-spacing */
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--primary-color) !important; /* Primary blue on hover/active */
+    transform: none; /* Remove previous lift */
+    text-shadow: none; /* Remove previous glow */
+}
+
+/* Active/Hover Underline Effect - more subtle and modern */
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Closer to text */
+    left: 50%;
+    width: 0;
+    height: 2px; /* Thinner underline */
+    background-color: var(--secondary-color);
+    border-radius: 1px;
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0); /* Start fully compressed */
+    transition: width 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-nav .nav-link.active::after,
+.navbar-nav .nav-link:hover::after {
+    width: 100%; /* Full width underline */
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+}
+
+.navbar-toggler {
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Softer border */
+    background-color: transparent; /* No background */
+    border-radius: var(--border-radius-medium);
+    padding: 8px 10px; /* Slightly smaller padding */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar-toggler:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Very light background on hover */
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(10,66,117)' stroke-width='2.5' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); /* Primary blue color for icon lines */
+}
+
+/* Dropdown specific styles (from previous suggestion) */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: none; /* Remove default border */
+}
+
+.dropdown-item {
+    color: var(--text-dark); /* Dark text for dropdown items */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--background-light); /* Light background on hover */
+    color: var(--primary-color);
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: #dc3545; /* Bootstrap danger red */
+    color: #fff;
+}
+
+
+/* --- Button Styles --- */
+.btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    border-radius: var(--border-radius-medium); /* Consistent medium radius */
+    padding: 0.8rem 2.0rem; /* Optimal button size */
+    cursor: pointer;
+    transition: all var(--transition-duration) var(--transition-easing);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    box-shadow: var(--shadow-subtle); /* Softer initial shadow */
+    border: none;
+}
+
+.btn-primary {
+    background: var(--primary-color); /* Solid primary color, simpler */
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Simpler hover for primary btn */
+.btn-primary:hover {
+    background-color: #083a5c; /* Slightly darker primary on hover */
+    transform: translateY(-3px); /* Subtle lift */
+    box-shadow: var(--shadow-medium); /* More pronounced shadow */
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Simpler hover for secondary btn */
+.btn-secondary:hover {
+    background-color: #e69500; /* Darker secondary on hover */
+    border-color: #e69500;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Specific dashboard edit button style */
+.btn-edit-profile {
+    background-color: var(--primary-color); /* Match overall primary button style */
+    border-color: var(--primary-color);
+    font-weight: 600;
+    padding: 10px 25px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-subtle);
+}
+
+.btn-edit-profile:hover {
+    background-color: #083a5c; /* Darker primary on hover */
+    border-color: #083a5c;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+
+/* --- Section/Card Styles (For content blocks) --- */
+.card {
+    background-color: #ffffff;
+    border-radius: var(--border-radius-medium); /* Consistent medium radius for general cards */
+    box-shadow: var(--shadow-subtle);
+    padding: 40px;
+    margin-bottom: 40px;
+    transition: transform var(--transition-duration) var(--transition-easing), box-shadow var(--transition-duration) var(--transition-easing);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Moderate lift on hover */
+    box-shadow: var(--shadow-medium);
+}
+
+/* Dashboard Card (from previous suggestion) */
+.dashboard-card {
+    background-color: #ffffff;
+    border-radius: var(--border-radius-medium); /* Consistent with other cards */
+    box-shadow: var(--shadow-medium); /* Slightly more prominent shadow for dashboard card */
+    padding: 30px;
+    margin-bottom: 30px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+.profile-img-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--primary-color); /* Using your primary color variable */
+    box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.2); /* Subtle glow effect (can use rgba of primary-color too) */
+}
+
+.profile-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.profile-img-container img:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.info-item {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    font-size: 1.05rem;
+    color: var(--text-medium);
+}
+
+.info-item strong {
+    color: var(--text-dark);
+    min-width: 120px; /* Align labels */
+    display: inline-block;
+}
+
+.info-item i {
+    color: var(--primary-color); /* Icon color */
+    margin-right: 10px;
+    width: 20px; /* Fixed width for icons */
+    text-align: center;
+}
+
+/* Modal for full image view */
+.modal-content.bg-transparent {
+    background-color: rgba(0, 0, 0, 0.7) !important; /* Darker transparent background */
+}
+.modal-body.text-center img {
+    max-width: 90%; /* Adjust max-width for larger screens */
+    max-height: 85vh; /* Adjust max-height for better fit */
+    object-fit: contain; /* Ensure the image fits within the modal without cropping */
+    border-radius: var(--border-radius-medium);
+    border: 2px solid var(--primary-color); /* Add a border to the image in modal */
+    box-shadow: var(--shadow-deep);
+}
+
+
+/* --- Footer Styles --- */
+footer {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, #083a5c 100%); /* Your original gradient */
+    color: rgba(255, 255, 255, 0.95); /* Brighter white for footer text */
+    padding: 4rem 0; /* Very generous padding for a substantial footer */
+    margin-top: 6rem; /* More vertical separation from content */
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.1); /* Clear top shadow */
+    border-top-left-radius: var(--border-radius-large);
+    border-top-right-radius: var(--border-radius-large);
+}
+
+footer a {
+    color: var(--secondary-color); /* Your golden accent for links */
+    text-decoration: none;
+    transition: color var(--transition-duration) var(--transition-easing);
+}
+
+footer a:hover {
+    color: var(--accent-light); /* Lighter accent on hover */
+    text-decoration: underline;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.8); /* Softer white for general footer text */
+    line-height: 1.7;
+    margin-bottom: 0.8em; /* Add some margin below paragraphs if they're stacked */
+    font-size: 0.95em;
+}
+
+footer .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+}
+
+footer .col {
+    flex: 1;
+    min-width: 280px; /* Larger minimum width for columns */
+    padding: 20px;
+}
+
+footer .col h5 { /* Changed h4 to h5 to match your base.html structure */
+    color: var(--text-light); /* This should already be set to soft white */
+    margin-bottom: 18px;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+/* Footer Contact Text Colors */
+footer .col p .contact-label {
+    color: var(--text-light); /* Soft white for clear visibility on dark background */
+    font-weight: 500;
+    margin-right: 8px;
+    transition: color var(--transition-duration) var(--transition-easing);
+}
+
+footer .col p .num {
+    text-decoration: none;
+    font-weight: 600;
+    transition: all var(--transition-duration) var(--transition-easing);
+}
+
+footer .col p .email-address {
+    color: var(--secondary-color);
+}
+
+footer .col p .phone-number {
+    color: #6dd5ed; /* Using the light blue you chose for distinction */
+}
+
+footer .col p .num:hover {
+    color: var(--accent-light);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Social icons within footer */
+.footer .social-icons a {
+    color: var(--text-light); /* Light text color for icons */
+    margin-right: 15px;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.footer .social-icons a:hover {
+    color: var(--secondary-color); /* Golden accent on hover */
+}
+
+.footer .border-top {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    padding-top: 15px;
+    margin-top: 25px;
+}
+
+
+/* Scroll-to-top button */
+#scrollTopBtn {
+    background-color: var(--secondary-color); /* Use secondary color for the button */
+    border-color: var(--secondary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary-color); /* Dark text on light button */
+}
+
+#scrollTopBtn:hover {
+    background-color: #e69500; /* Darker secondary on hover */
+    border-color: #e69500;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+
+/* --- Responsive Styles --- */
+@media (max-width: 1200px) {
+    .container { padding: 0 20px; }
+    h1 { font-size: 2.8em; }
+    h2 { font-size: 2.2em; }
+    .btn { padding: 0.9rem 2.2rem; }
+}
+
+@media (max-width: 992px) {
+    h1 { font-size: 2.4em; }
+    h2 { font-size: 2em; }
+    .navbar-brand { font-size: 1.9em; }
+    .navbar-nav .nav-link { padding: 0.6rem 1.2rem; }
+    .navbar-nav .nav-link::after { bottom: -6px; height: 3px; }
+    .btn { padding: 0.8rem 1.8rem; }
+    .card { padding: 30px; }
+    footer .col { min-width: 220px; }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.7em; }
+    .navbar {
+        border-radius: 0; /* Remove rounded corners on mobile nav */
+        padding: 1rem 0;
+    }
+    .navbar-nav {
+        text-align: center;
+        background-color: var(--primary-color); /* Use primary color for mobile nav background */
+        padding: 10px 0;
+        border-bottom-left-radius: var(--border-radius-medium);
+        border-bottom-right-radius: var(--border-radius-medium);
+    }
+    .navbar-nav .nav-link {
+        font-size: 17px;
+        padding: 15px 0;
+        color: var(--text-light); /* Light text on primary background */
+    }
+    .navbar-nav .nav-link:hover {
+        background-color: #083a5c; /* Darker primary on mobile hover */
+        transform: none;
+        text-shadow: none;
+    }
+    .navbar-nav .nav-link::after {
+        display: none; /* Hide underline on mobile for clarity */
+    }
+
+    .btn {
+        padding: 0.8rem 1.6rem;
+        font-size: 0.9em;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .card {
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+    footer .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    footer .col {
+        min-width: unset;
+        width: 100%;
+        margin-bottom: 25px;
+    }
+    footer .col:last-child {
+        margin-bottom: 0;
+    }
+    footer .col h5 { /* Changed h4 to h5 */
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 1.8em; }
+    h2 { font-size: 1.4em; }
+    .container { padding: 0 15px; }
+    .card { padding: 20px; }
+}
+
+
+
+/* Custom CSS for Dashboard */
+    .dashboard-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+        padding: 30px;
+        margin-bottom: 30px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-5px); /* Slight lift on hover */
+    }
+
+    .profile-img-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 20px auto;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid var(--bs-primary); /* Use Bootstrap primary color for border */
+        box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.2); /* Subtle glow effect */
+    }
+
+    .profile-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .profile-img-container img:hover {
+        transform: scale(1.05); /* Slight zoom on hover */
+    }
+
+    .info-item {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        font-size: 1.05rem;
+        color: #555;
+    }
+
+    .info-item strong {
+        color: #333;
+        min-width: 120px; /* Align labels */
+        display: inline-block;
+    }
+
+    .info-item i {
+        color: var(--bs-primary); /* Icon color */
+        margin-right: 10px;
+        width: 20px; /* Fixed width for icons */
+        text-align: center;
+    }
+
+    .btn-edit-profile {
+        background-color: var(--bs-primary);
+        border-color: var(--bs-primary);
+        font-weight: 600;
+        padding: 10px 25px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-edit-profile:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        border-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    /* Modal for full image view */
+    .modal-content.bg-transparent {
+        background-color: rgba(0, 0, 0, 0.7) !important; /* Darker transparent background */
+    }
+    .modal-body.text-center img {
+        max-width: 90%; /* Adjust max-width for larger screens */
+        max-height: 85vh; /* Adjust max-height for better fit */
+        object-fit: contain; /* Ensure the image fits within the modal without cropping */
+        border-radius: 10px;
+    }
+/*
+ * Custom CSS for the Job Board Home Page
+ * File: static/css/style.css
+ */
+
+/* Global Body Styling */
+body {
+    background-color: #f8f9fa; /* Light grey background for the whole page */
+}
+
+/* Hero Section */
+.job_board_hero_section {
+    background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%); /* Blue gradient */
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: jobBoardFadeIn 1s ease-out; /* Unique fade-in animation */
+}
+
+.job_board_hero_section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.job_board_hero_section p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+}
+
+/* Latest Job Listings Heading */
+.job_board_section_heading {
+    color: #343a40;
+    font-weight: 600;
+}
+
+.job_board_heading_underline {
+    border-top: 2px solid #007bff;
+    width: 80px;
+    margin: auto;
+}
+
+/* Job Card Styling */
+.job_board_card {
+    border: none; /* Remove default card border */
+    border-radius: 12px; /* More rounded corners */
+    overflow: hidden; /* Ensures inner content respects border-radius */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Stronger but softer shadow */
+    height: 100%; /* Ensure all cards in a row are same height */
+    display: flex;
+    flex-direction: column;
+}
+
+.job_board_card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
+}
+
+.job_board_card_body {
+    padding: 25px; /* Increase padding for more breathing room */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows body to grow and fill space */
+}
+
+.job_board_card_body h5 {
+    color: #007bff; /* Primary blue for job titles */
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.job_board_card_body h6 {
+    color: #6c757d; /* Muted grey for company names */
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.job_board_card_body p {
+    color: #495057; /* Darker grey for description */
+    line-height: 1.6;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Allows description to take up available space */
+}
+
+.job_board_card_body strong {
+    color: #343a40; /* Even darker for strong text */
+}
+
+/* Button Styling (if not overridden by Bootstrap defaults) */
+.job_board_btn_primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.job_board_btn_primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    transform: translateY(-2px); /* Slight lift on button hover */
+}
+
+.job_board_btn_success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.job_board_btn_outline_secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+    transition: all 0.3s ease;
+}
+.job_board_btn_outline_secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* No Jobs Message */
+.job_board_no_jobs_message {
+    text-align: center;
+    padding: 50px 0;
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+/* Keyframe animation for fade-in effect */
+@keyframes jobBoardFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/*
+ * Custom CSS for the Job Board Home Page
+ * File: static/css/style.css
+ */
+
+/* ... (previous CSS code) ... */
+
+.job_board_card_body p {
+    color: #495057; /* Darker grey for description */
+    line-height: 1.6;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Allows description to take up available space */
+
+    /* --- NEW ADDITIONS FOR BETTER LOOK --- */
+    font-size: 0.95rem; /* Slightly smaller for compactness */
+    /* Add a subtle top border for visual separation from company name if needed */
+    /* border-top: 1px solid #eee; */
+    /* padding-top: 10px; */
+    /* margin-top: 10px; */
+    /* If you want to make the text stand out more, you can play with font-weight */
+    /* font-weight: 400; */
+    /* You might even add a soft background if it suits your design */
+    /* background-color: #fcfcfc; */
+    /* padding: 10px; */
+    /* border-radius: 5px; */
+}
+
+/* ... (rest of your CSS) ... *
+
+/
+
+/*
+ * Custom CSS for the Job Board Home Page
+ * File: static/css/style.css
+ */
+
+/* ... (Keep all previous global body, hero section, and general card styles as they are good base) ... */
+
+
+/* --- CORE JOB CARD STYLING (keep the base structure and hover) --- */
+.job_board_card {
+    background-color: #ffffff;
+    border: 1px solid #e7e7e7;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.job_board_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.job_board_card_body {
+    padding: 25px 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Typography within the Card - FOCUS ON "COOL" EFFECTS --- */
+
+/* Job Title (e.g., Python developer) - "Job Name Look Cool" */
+.job_board_card_body h5 {
+    font-size: 2.0rem; /* Larger font size for impact */
+    font-weight: 800; /* Extra bold for prominence */
+    color: #0056b3; /* A deeper, professional blue for main title */
+    margin-bottom: 5px;
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); /* Very subtle text shadow for depth */
+    /* If you want a specific font, you'd add @import url() in your style.css and then font-family here */
+    /* Example for a Google Font (needs to be loaded in base.html head): */
+    /* font-family: 'Montserrat', sans-serif; */
+}
+
+/* Company Name (e.g., TCS) - "Company Name Look More Cool" */
+.job_board_card_body h6 {
+    font-size: 1.2rem; /* Make company name more prominent */
+    font-weight: 600; /* Bolder than before */
+    color: #495057; /* A solid dark grey for professionalism */
+    margin-bottom: 25px;
+    /* You can add a subtle border or background here if you want it to stand out more as a badge */
+    /* background-color: #f0f3f6; */
+    /* display: inline-block; */
+    /* padding: 3px 8px; */
+    /* border-radius: 5px; */
+    /* letter-spacing: 0.5px; */ /* Slight letter spacing for cool effect */
+    /* text-transform: uppercase; */ /* All caps for a modern tech company look */
+}
+
+/* Job Description */
+.job_board_card_body p.job_description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #495057;
+    margin-bottom: 20px;
+    flex-grow: 1;
+    max-height: 4.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Location - Add PNG/JPG Image Icon */
+.job_board_card_body p.job_location_text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #343a40;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Style for the Location Image */
+.job_board_card_body p.job_location_text img.location-icon {
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+    object-fit: contain; /* Ensures image is scaled properly */
+    vertical-align: middle; /* Align with text */
+    /* You can add a filter if you want to change its color */
+    /* filter: grayscale(100%) brightness(50%) sepia(100%) hue-rotate(180deg) saturate(500%) contrast(100%); */ /* Example: turn it blue */
+}
+
+
+/* --- Button Styling (keep as is, they look good) --- */
+.job_board_btn_apply,
+.job_board_btn_applied,
+.job_board_btn_login_to_apply {
+    font-size: 0.95rem;
+    padding: 10px 25px;
+    border-radius: 8px;
+    transition: all 0.2s ease-out;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.job_board_btn_apply {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    color: white;
+}
+.job_board_btn_apply:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+.job_board_btn_applied {
+    background-color: #28a745;
+    border: 1px solid #28a745;
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.9;
+    box-shadow: 0 2px 5px rgba(40, 167, 69, 0.2);
+}
+
+.job_board_btn_login_to_apply {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    color: #6c757d;
+}
+.job_board_btn_login_to_apply:hover {
+    background-color: #e9ecef;
+    color: #495057;
+    border-color: #adb5bd;
+}
+
+/* Keyframe animation */
+@keyframes jobBoardFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

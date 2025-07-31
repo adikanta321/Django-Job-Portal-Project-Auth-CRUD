@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Custom CSS for Dashboard */
+    .dashboard-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+        padding: 50px;
+        margin-bottom: 30px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-5px); /* Slight lift on hover */
+    }
+
+    .profile-img-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 20px auto;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid var(--bs-primary); /* Use Bootstrap primary color for border */
+        box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.2); /* Subtle glow effect */
+    }
+
+    .profile-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .profile-img-container img:hover {
+        transform: scale(1.05); /* Slight zoom on hover */
+    }
+    
+    /* FIX: Added a class to force long text to wrap */
+    .word-break-all {
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .info-item {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        font-size: 1.05rem;
+        color: #555;
+    }
+    
+    /* FIX: Removed fixed width to allow flexible layout */
+    .info-item strong {
+        color: #333;
+        min-width: 120px; /* Align labels */
+        display: inline-block;
+    }
+
+    .info-item i {
+        color: var(--bs-primary); /* Icon color */
+        margin-right: 10px;
+        width: 20px; /* Fixed width for icons */
+        text-align: center;
+    }
+
+    .btn-edit-profile {
+        background-color: var(--bs-primary);
+        border-color: var(--bs-primary);
+        font-weight: 600;
+        padding: 10px 25px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-edit-profile:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        border-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    /* Modal for full image view */
+    .modal-content.bg-transparent {
+        background-color: rgba(0, 0, 0, 0.7) !important; /* Darker transparent background */
+    }
+    .modal-body.text-center img {
+        max-width: 90%; /* Adjust max-width for larger screens */
+        max-height: 85vh; /* Adjust max-height for better fit */
+        object-fit: contain; /* Ensure the image fits within the modal without cropping */
+        border-radius: 10px;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h2 class="display-4 fw-bold text-primary">My Dashboard</h2>
+        <p class="lead text-muted">Welcome, {{ user.full_name|default:user.email }}! Here's an overview of your profile.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="dashboard-card">
+                <div class="text-center">
+                    <div class="profile-img-container" data-bs-toggle="modal" data-bs-target="#profileImageModal">
+                        {% if user.profile_picture %}
+                            <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+                        {% else %}
+                            <img src="{% static 'img/default.png' %}" alt="Default Profile Picture">
+                        {% endif %}
+                    </div>
+                    <h3 class="mt-4 mb-2 fw-bold">{{ user.full_name|default:"No Name Provided" }}</h3>
+                    <!-- FIX: Added the 'word-break-all' class here to fix the text overflow -->
+                    {% if user.job_title %}<p class="text-muted fs-5 word-break-all">{{ user.job_title }}</p>{% endif %}
+                </div>
+
+                <hr class="my-4">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="info-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> {{ user.email }}</div>
+                        {% if user.phone_number %}
+                        <div class="info-item"><i class="fas fa-phone"></i> <strong>Phone: </strong> +91&nbsp;-{{ user.phone_number }}</div>
+                        {% endif %}
+                        {% if user.address %}
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> {{ user.address }}</div>
+                        {% endif %}
+                        {% if user.city %}
+                        <div class="info-item"><i class="fas fa-city"></i> <strong>City:</strong> {{ user.city }}</div>
+                        {% endif %}
+                        {% if user.state %}
+                        <div class="info-item"><i class="fas fa-globe-americas"></i> <strong>State:</strong> {{ user.state }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        {% if user.country %}
+                        <div class="info-item"><i class="fas fa-globe"></i> <strong>Country:</strong> {{ user.country }}</div>
+                        {% endif %}
+                        {% if user.zip_code %}
+                        <div class="info-item"><i class="fas fa-code-branch"></i> <strong>Zip Code:</strong> {{ user.zip_code }}</div>
+                        {% endif %}
+                        {% if user.date_of_birth %}
+                        <div class="info-item"><i class="fas fa-calendar-alt"></i> <strong>D.O.B:</strong> {{ user.date_of_birth|date:"M d, Y" }}</div>
+                        {% endif %}
+                        {% if user.skills %}
+                        <div class="info-item"><i class="fas fa-tools"></i> <strong>Skills:</strong> {{ user.skills }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="row">
+                    {% if user.linkedin_profile %}
+                    <div class="col-md-6 mb-3">
+                        <div class="info-item">
+                            <i class="fab fa-linkedin"></i> <strong>LinkedIn:</strong> 
+                            <a href="{{ user.linkedin_profile }}" target="_blank" class="text-decoration-none text-primary word-break-all">{{ user.linkedin_profile|truncatechars:30 }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if user.github_profile %}
+                    <div class="col-md-6 mb-3">
+                        <div class="info-item">
+                            <i class="fab fa-github"></i> <strong>GitHub:</strong> 
+                            <a href="{{ user.github_profile }}" target="_blank" class="text-decoration-none text-primary word-break-all">{{ user.github_profile|truncatechars:30 }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if user.projects %}
+                    <div class="col-12 mb-3">
+                        <div class="info-item">
+                            <i class="fas fa-project-diagram"></i> <strong>Projects:</strong> {{ user.projects }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if user.resume %}
+                    <div class="col-12">
+                        <div class="info-item">
+                            <i class="fas fa-file-alt"></i> <strong>Resume:</strong> 
+                            <a href="{{ user.resume.url }}" target="_blank" class="text-decoration-none text-primary">View Resume</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{% url 'edit_profile' %}" class="btn btn-primary btn-edit-profile">
+                        <i class="fas fa-user-edit me-2"></i> Edit My Profile
+                    </a>
+                    <a class="btn btn-outline-primary mt-3" href="{% url 'applied-jobs' %}">View Applied Jobs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-transparent border-0">
+            <div class="modal-body text-center p-0">
+                {% if user.profile_picture %}
+                <img src="{{ user.profile_picture.url }}" class="img-fluid rounded shadow-lg border border-primary">
+                {% else %}
+                <img src="{% static 'img/default.png' %}" class="img-fluid rounded shadow-lg border border-primary">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

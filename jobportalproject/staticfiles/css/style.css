@@ -1,0 +1,83 @@
+/* Import Google Font: Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Apply to entire site */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #0a4275; /* Dark blue background */
+}   
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.navbar-nav .nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: white; /* White text for nav links */
+}
+.navbar-nav .nav-link:hover {
+    color: #f8f9fa; /* Lighter shade on hover */
+}
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5); /* Lighter border for toggler */
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+/* Footer styles */
+
+footer {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+footer a {
+    color: #f8f9fa; /* White text for footer links */
+    text-decoration: none; /* Remove underline */
+}
+footer a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+footer p {
+    margin: 0; /* Remove default margin */
+}
+footer .container {
+    max-width: 1200px; /* Center footer content */
+    margin: 0 auto; /* Center align */
+}
+/* Responsive styles */
+@media (max-width: 768px) {
+    .navbar-nav .nav-link {
+        font-size: 14px; /* Smaller font size for mobile */
+    }
+    footer p {
+        font-size: 14px; /* Smaller footer text on mobile */
+    }
+}
+
+/* Additional styles for better readability */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; /* Bold headings */
+}
+p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400; /* Regular paragraph text */
+    line-height: 1.6; /* Improved line height for readability */
+}
+/* Button styles */
+.btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500; /* Medium weight for buttons */
+    border-radius: 5px; /* Slightly rounded corners */
+}
+.btn-primary {
+    background-color: #0a4275; /* Primary button color */
+    border: none; /* Remove border */
+}
+.btn-primary:hover {
+    background-color: #083a5c; /* Darker shade on hover */
+}
