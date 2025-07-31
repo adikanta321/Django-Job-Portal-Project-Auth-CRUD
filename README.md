@@ -1,3 +1,7 @@
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
 # Django Job Portal 🧑‍💼
 
 This is a job portal website built using Django where users can register, log in, view job listings, apply for jobs, and manage their applications. Admins can post and manage job listings.
