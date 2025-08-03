@@ -72,44 +72,68 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+
 def forgot_password_view(request):
+    """
+    Handles the password reset request by email.
+    
+    This function processes the submitted email, finds the user, and
+    sends a password reset link by email with the correct uid and token.
+    """
     if request.method == 'POST':
         form = ForgotPasswordForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             try:
+                # Find the user by email
                 user = User.objects.get(email=email)
-                token = default_token_generator.make_token(user)
+                
+                # Generate the unique uid and token
+                # This is the part that must not be empty
                 uid = urlsafe_base64_encode(force_bytes(user.pk))
-                reset_link = request.build_absolute_uri(f'/reset_password/{uid}/{token}/')
+                token = default_token_generator.make_token(user)
+
+                # Prepare the context for the email template
+                context = {
+                    'user': user,
+                    'domain': request.get_host(),  # Get the current domain
+                    'uid': uid,
+                    'token': token,
+                    'protocol': 'https' if request.is_secure() else 'http',
+                }
 
                 subject = "Reset Your Password"
-                message = render_to_string(
-                    'accounts/password_reset_email.html',
-                    {'reset_link': reset_link, 'user': user
-                     })
+                # Render the email template, now with the correct context variables
+                message = render_to_string('accounts/password_reset_email.html', context)
+                
                 email_msg = EmailMessage(
-                    subject, message, to=[email]
+                    subject, 
+                    message, 
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to=[email]
                 )
                 email_msg.content_subtype = 'html'
                 email_msg.send()
 
-                messages.success(
-                    request, "Password reset link has been sent to your email. ✅"
-                )
+                messages.success(request, "Password reset link has been sent to your email. ✅")
                 return redirect('login')
+            
             except User.DoesNotExist:
-                messages.error(
-                    request, "No user found with this email address. ❌"
-                )
+                messages.error(request, "No user found with this email address. ❌")
+        else:
+            messages.error(request, "Please enter a valid email address.")
     else:
         form = ForgotPasswordForm()
+
     return render(request, 'accounts/forgot_password.html', {'form': form})
 
 
-
 def reset_password(request, uidb64, token):
+    """
+    Handles the password reset page, validating the uid and token.
+    """
     try:
+        # Decode the uidb64 to get the user's primary key
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except (User.DoesNotExist, ValueError, TypeError):
@@ -128,6 +152,9 @@ def reset_password(request, uidb64, token):
     else:
         messages.error(request, "Reset link is invalid or expired.")
         return redirect('forgot_password')
+
+# --- Add your other views here ---
+# e.g., home, register_view, login_view, logout_view, etc.
 
 @login_required
 def dashboard_view(request):

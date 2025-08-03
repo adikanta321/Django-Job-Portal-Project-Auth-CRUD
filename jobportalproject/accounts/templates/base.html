@@ -31,12 +31,12 @@
 
         .navbar-brand {
             font-size: 1.8rem;
-            color: #007bff !important; /* Primary blue for brand */
+            color: #044386 !important; /* Primary blue for brand */
             transition: color 0.3s ease;
         }
 
         .navbar-brand:hover {
-            color: #0056b3 !important;
+            color: #075eba !important;
         }
 
         .navbar-brand img {
@@ -44,7 +44,7 @@
         }
 
         .navbar-nav .nav-link {
-            color: #495057 !important; /* Darker grey for nav links */
+            color: #09e5e5 !important; /* Darker grey for nav links */
             font-weight: 500;
             margin-left: 15px;
             transition: all 0.3s ease;
@@ -52,7 +52,7 @@
 
         .navbar-nav .nav-link:hover,
         .navbar-nav .nav-link.active {
-            color: #007bff !important; /* Primary blue on hover/active */
+            color: #0275e8 !important; /* Primary blue on hover/active */
         }
 
         .dropdown-menu {
@@ -67,7 +67,7 @@
 
         .dropdown-item:hover {
             background-color: #e9ecef;
-            color: #007bff;
+            color: #0657fa;
         }
 
         .dropdown-item.text-danger:hover {
@@ -89,7 +89,7 @@
         }
 
         .footer h5 {
-            color: #007bff; /* Primary blue for footer headings */
+            color: #eff0f1; /* Primary blue for footer headings */
             margin-bottom: 20px;
             font-weight: 700;
         }
@@ -117,7 +117,7 @@
         }
 
         .footer .social-icons a:hover {
-            color: #007bff;
+            color: #0768cf;
         }
 
         .footer .border-top {
@@ -128,7 +128,7 @@
 
         #scrollTopBtn {
             background-color: #007bff;
-            border-color: #007bff;
+            border-color: #f4f5f6;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s ease, transform 0.3s ease;
             width: 50px; /* Make it a perfect circle */
@@ -182,7 +182,7 @@
                             <li><a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a></li>
                             <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a></li>
+                            <li><a class="dropdown-item text" href="{% url 'logout' %}">Logout</a></li>
                         </ul>
                     </li>
                 {% else %}
@@ -222,7 +222,7 @@
                 <h5 class="fw-bold">Contact</h5>
                 <ul class="list-unstyled">
                     <li>Email: dashrudramadhab595@gmail.com</li>
-                    <li>Phone: +91-9668220656</li>
+                    <!-- <li>Phone: +91-9668220656</li> -->
                     <li>Location: Gurugram, Haryana</li>
                 </ul>
                 <div class="mt-3 social-icons">

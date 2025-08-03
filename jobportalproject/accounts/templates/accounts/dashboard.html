@@ -98,7 +98,7 @@
 <div class="container mt-5">
     <div class="text-center mb-5">
         <h2 class="display-4 fw-bold text-primary">My Dashboard</h2>
-        <p class="lead text-muted">Welcome, {{ user.full_name|default:user.email }}! Here's an overview of your profile.</p>
+        <p class="lead text-muted text-center"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Welcome, {{ user.full_name|default:user.email }}! Here's an overview of your profile.</p>
     </div>
 
     <div class="row justify-content-center">
@@ -121,7 +121,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="info-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> {{ user.email }}</div>
+                        <div class="info-item word-break-all"><i class="fas fa-envelope"></i> <strong>Email:</strong> {{ user.email }}</div>
                         {% if user.phone_number %}
                         <div class="info-item"><i class="fas fa-phone"></i> <strong>Phone: </strong> +91&nbsp;-{{ user.phone_number }}</div>
                         {% endif %}
@@ -172,7 +172,7 @@
                     {% endif %}
                     {% if user.projects %}
                     <div class="col-12 mb-3">
-                        <div class="info-item">
+                        <div class="info-item word-break-all">
                             <i class="fas fa-project-diagram"></i> <strong>Projects:</strong> {{ user.projects }}
                         </div>
                     </div>
