@@ -4,8 +4,6 @@
 This project is licensed under the [MIT License](LICENSE).
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-Linked-In: https://www.linkedin.com/in/dash-rudra/?originalSubdomain=in [Connect With Me]
-
 ## 🧑‍💼 Python , Django Job Portal
 
 A powerful, production-ready Job Portal built with Django — featuring secure custom authentication, robust email workflows, and a fully responsive interface.
@@ -15,6 +13,7 @@ This project demonstrates full-stack development using Django, with a focus on c
 Admins have complete control over job postings with full CRUD capabilities. The application features secure password reset via SMTP, one-click job applications, and a professional UI powered by Bootstrap 5 — making it an ideal showcase of professional Django development.
 
 ---
+<img width="20" height="20" alt="icons8-linkedin-48" src="https://github.com/user-attachments/assets/9ba1e976-3dce-4d38-8d6a-673266855b5f" /> Linked-In : https://www.linkedin.com/in/dash-rudra/?originalSubdomain=in [Connect With Me]
 
 ## ✨ Features
 
